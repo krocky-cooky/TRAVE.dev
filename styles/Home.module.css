@@ -276,3 +276,24 @@
     transform: rotate(0deg);
   }
 }
+
+.battle_monitor {
+  display: flex;
+  flex-direction: row;
+}
+
+.red_vertical_gradient {
+  background: linear-gradient(0deg, rgb(255, 255, 255), rgb(255, 0, 0));
+}
+
+.blue_vertical_gradient {
+  background: linear-gradient(0deg, rgb(255, 255, 255), rgb(0, 0, 255));
+}
+
+.red_horizontal_gradient {
+  background: linear-gradient(90deg, rgb(255, 0, 0), rgb(255, 0, 0));
+}
+
+.blue_horizontal_gradient {
+  background: linear-gradient(-90deg, rgb(0, 0, 255), rgb(76, 0, 255));
+}

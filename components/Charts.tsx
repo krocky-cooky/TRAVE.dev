@@ -1,72 +1,42 @@
-import React from "react";
-import { useRef } from "react";
-// import { LineChart, Line, XAxis, YAxis } from 'recharts';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    // Title,
-    // Tooltip,
-    // Legend
-  );
-
-export interface lineChartDataFormat {
-    labels: string[];
-    datasets: {
-        label: string;
-        data: number[];
-        borderColor: string;
-        backgroundColor: string;
-        pointRadius: number
-    }[]
-}
-
-const chartOptions = {
-    responsive: true,
-    scales:{
-        x: {
-            grid: {
-                display: false
-            }
-        },
-        y: {
-            grid: {
-                display: false
-            }
-        }
-    }
-}
+import { useRef } from 'react';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+import {Motion, spring} from "react-motion";
 
 
 export const PowerLineChart = (props: {
-    data: lineChartDataFormat
+    data: number,
+    width: string,
+    height: string,
+    image: string,
+    imgWidth: number,
+    imgHeight: number,
+    colorClass: string
 }) => {
-    const chartRef = useRef<ChartJS>();
-    if(chartRef.current){
-        chartRef.current.data = props.data;
-        chartRef.current.update();
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const ctx = canvasRef.current?.getContext('2d');
+    if(ctx){
+        const WIDTH = ctx.canvas.width;
+        const HEIGHT = ctx.canvas.height;
+        ctx.clearRect(0,0,WIDTH,HEIGHT);
+        ctx.fillStyle = 'rgba(0,0,0,0)';
+        ctx.fillRect(0,0,WIDTH,HEIGHT);
+        ctx.fillStyle = 'rgb(214, 219, 220)';
+        ctx.fillRect(0,0,WIDTH,HEIGHT*(1-props.data));
+        ctx.save();
     }
+
+
     return (
-        <div>
-            <Line
-                options={chartOptions}
-                data={props.data}
-                ref={chartRef}
-            />
+        <>
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <Image src={props.image} width={props.imgWidth} height={props.imgHeight} alt="My avatar" />
+            <div style={{height: "10px"}}></div>
+            <div style={{width: props.width, height: props.height}} className={props.colorClass}>
+                <canvas ref={canvasRef} style={{height: "100%",width: "100%"}} />
+            </div>
         </div>
+        </>
     )
 }
 

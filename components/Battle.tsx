@@ -23,7 +23,7 @@ export const BattleViewer = (props: {
                         <div 
                             style={{
                                 height: '100%',
-                                width: `${value.p*700}px`,
+                                width: `${(1-value.p)*700}px`,
                             }}
                             className={styles.blue_horizontal_gradient}
                             >

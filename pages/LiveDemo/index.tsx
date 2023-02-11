@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {lineChartDataFormat} from '../../components/Charts';
+import styles from '../../styles/Home.module.css';
 import Head from 'next/head'
 import dynamic from "next/dynamic";
 import PowerLineChart from '../../components/Charts';
 import BattleViewer from '../../components/Battle';
+import { normalize } from 'path';
 
 type ContainerProps = {}
 
@@ -11,127 +12,98 @@ type CommunicationFormat = {
     normalizedData: number,
     deviceInterface: number,
     latestWinner: number,
+    deviceTorque: number
 }
 
 export const LiveDemo = (props: ContainerProps) => {
-    const MAX_VALUE_LENGTH: number = 20;
-    const CHART_TIMER_UPDATE_INTERVAL_MS = 1500;
-    const BATTLE_TIMER_UPDATE_INTERVAL_MS = 500;
-    const INITIAL_LINE_CHART_DATA: lineChartDataFormat = {
-        labels: [],
-        datasets: [
-            {
-                label: "value",
-                data: [],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                pointRadius: 0
-            }
-        ]
-    }
-    for(var i=0;i < MAX_VALUE_LENGTH;++i) {
-        INITIAL_LINE_CHART_DATA.datasets[0].data.push(0);
-        INITIAL_LINE_CHART_DATA.labels.push(`${i}`);
-    }
+    const CHART_TIMER_UPDATE_INTERVAL_MS = 1000;
+    const BATTLE_TIMER_UPDATE_INTERVAL_MS = 1000;
+    const PASS = "112358";
 
+    const [visible, setVisible] = useState<boolean>(false);
+    const [inputValue, setInputValue] = useState<string>("");
     const [chartTimer, setChartTimer] = useState<number>(0);
     const [battleTimer, setBattleTimer] = useState<number>(0);
     const socketRef = useRef<WebSocket>();
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [currentDeviceProfile, setCurrentDeviceProfile] = useState<CommunicationFormat>();
-    const [deviceLineChartProp, setDeviceLineChartProp] = useState<lineChartDataFormat>(INITIAL_LINE_CHART_DATA);
+    const [deviceLineChartProp, setDeviceLineChartProp] = useState<number>(0);
     const [currentForceGaugeProfile, setCurrentForceGaugeProfile] = useState<CommunicationFormat>();
-    const [forceGaugeLineChartProp, setForceGaugeLineChartProp] = useState<lineChartDataFormat>(INITIAL_LINE_CHART_DATA);
+    const [forceGaugeLineChartProp, setForceGaugeLineChartProp] = useState<number>(0);
     const [battlePosition, setBattlePosition] = useState<number>(0.5);
     const updateChartTimer = () => {
         setInterval(() => {
             const nowTimer = new Date();
-            setChartTimer(nowTimer.getSeconds());
+            setChartTimer(nowTimer.getMilliseconds());
         },CHART_TIMER_UPDATE_INTERVAL_MS);
     }
     const updateBattleTimer = () => {
         setInterval(() => {
             const nowTimer = new Date();
-            setBattleTimer(nowTimer.getSeconds());
+            setBattleTimer(nowTimer.getMilliseconds());
         },BATTLE_TIMER_UPDATE_INTERVAL_MS);
     }
 
     const connectWebSocket = () => {
-        // socketRef.current = new WebSocket("wss://i1n1dxezt4.execute-api.ap-northeast-1.amazonaws.com/production");
-        // socketRef.current.onopen = () => {
-        //     setIsConnected(true);
-        //     console.log("websocket connected.");
-        // }
+        if(!visible)return;
+        if(socketRef.current?.readyState === 1) return;
+        socketRef.current = new WebSocket("wss://i1n1dxezt4.execute-api.ap-northeast-1.amazonaws.com/production");
+        socketRef.current.onopen = () => {
+            setIsConnected(true);
+            console.log("websocket connected.");
+        }
 
-        // socketRef.current.onclose = () => {
-        //     setIsConnected(false);
-        //     console.log("websocket closed.")
-        // }
+        socketRef.current.onclose = () => {
+            setIsConnected(false);
+            console.log("websocket closed.");
+        }
 
-        // socketRef.current.onmessage = (event) => {
-        //     const message: string = event.data;
-        //     const parsed: CommunicationFormat = JSON.parse(message) as CommunicationFormat;
-        //     if(parsed.deviceInterface === 0) {
-        //         setCurrentDeviceProfile(parsed);
-        //     } else if(parsed.deviceInterface == 1) {
-        //         setCurrentForceGaugeProfile(parsed);
-        //     }
-        // }
+        socketRef.current.onmessage = (event) => {
+            const message: string = event.data;
+            const parsed: CommunicationFormat = JSON.parse(message) as CommunicationFormat;
+            if(parsed.deviceInterface === 0) {
+                setCurrentDeviceProfile(parsed);
+            } else if(parsed.deviceInterface == 1) {
+                setCurrentForceGaugeProfile(parsed);
+            }
+        }
     };
 
     useEffect(() => {
         connectWebSocket();
-        updateChartTimer();
-        updateBattleTimer();
-    },[]);
+    },[visible]);
 
-    // useEffect(() => {
-
-    //     if(socketRef.current?.readyState === 3) {
-    //         connectWebSocket();
-    //     }
-    //     const position: number = battleTimer/60;
-    //     setBattlePosition(position);
-
-    // },[battleTimer]);
+    useEffect(() => {
+        if(socketRef.current?.readyState === 3) {
+            connectWebSocket();
+        }
+    },[battleTimer]);
     
     useEffect(() => {
-        //const normalizedValue = currentDeviceProfile?.normalizedData;
-        const normalizedValue = chartTimer%10;
-        console.log(normalizedValue);
-        const propTmp: lineChartDataFormat = {
-            labels: deviceLineChartProp.labels,
-            datasets: deviceLineChartProp.datasets
-        };
-        propTmp.datasets[0].data.push(normalizedValue);
-        // if(normalizedValue) {
-        //     propTmp.data.push(valueToBeInserted);
-        // }
-        if(propTmp.datasets[0].data.length > MAX_VALUE_LENGTH) {
-            propTmp.datasets[0].data.shift();
+        const normalizedValue = currentDeviceProfile?.normalizedData;
+        const deviceTorque = currentDeviceProfile?.deviceTorque;
+
+        if(deviceTorque)
+        {
+            setDeviceLineChartProp(deviceTorque/7.0);
+            
         }
 
-        setDeviceLineChartProp(propTmp);
+        if(normalizedValue)
+        {
+            setBattlePosition(normalizedValue);
+        }
 
-    },[chartTimer]);
+    },[currentDeviceProfile]);
 
     useEffect(() => {
-        //const normalizedValue = currentForceGaugeProfile?.normalizedData;
-        const normalizedValue = chartTimer%10;
-        const propTmp: lineChartDataFormat = {
-            labels: forceGaugeLineChartProp.labels,
-            datasets: forceGaugeLineChartProp.datasets
-        };
-        propTmp.datasets[0].data.push(normalizedValue);
-        // if(normalizedValue) {
-        //     propTmp.data.push(valueToBeInserted);
-        // }
-        if(propTmp.datasets[0].data.length > MAX_VALUE_LENGTH) {
-            propTmp.datasets[0].data.shift();
+        const normalizedValue = currentForceGaugeProfile?.normalizedData;
+        if(normalizedValue)
+        {
+            setForceGaugeLineChartProp(normalizedValue);
         }
-
-        setForceGaugeLineChartProp(propTmp);
-    }, [chartTimer]);
+        
+    }, [currentForceGaugeProfile]);
 
 
     return (
@@ -142,15 +114,45 @@ export const LiveDemo = (props: ContainerProps) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main>
-
-            <PowerLineChart
-                data={deviceLineChartProp} />
-            <PowerLineChart
-                data={forceGaugeLineChartProp} />
-            {/* <BattleViewer
-                position={battlePosition} /> */}
-
+            <main className={styles.main}>
+                {visible ? (
+                    <div className={styles.battle_monitor}>
+                        <PowerLineChart
+                            data={forceGaugeLineChartProp} 
+                            height={"200px"}
+                            width={"70px"}
+                            imgWidth={64}
+                            imgHeight={100}
+                            image="/images/forceGauge.png"
+                            colorClass={styles.blue_vertical_gradient} />
+                        <div style={{width:"20px"}}></div>
+                        <BattleViewer
+                            position={battlePosition} />
+                        <div style={{width:"20px"}}></div>
+                        <PowerLineChart
+                            data={deviceLineChartProp}
+                            height={"200px"}
+                            width={"70px"}
+                            imgWidth={100}
+                            imgHeight={100}
+                            image="/images/weight.png"
+                            colorClass={styles.red_vertical_gradient} />
+                    </div>
+                ) : (
+                    <>
+                        <input
+                            onChange={(event)=> {setInputValue(event.target.value)}}/>
+                        <button onClick={() => {
+                            if(inputValue === PASS) {
+                                setVisible(true);
+                            }
+                        }}>
+                            confirm
+                        </button>
+                    </>
+                )}
+                
+            
             </main>
         </>
     )

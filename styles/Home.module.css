@@ -343,13 +343,26 @@
 }
 
 .image_section {
-  height: 300px;
+}
+
+.image_container {
+  position :relative;
+  max-width:100%;
+
+}
+
+.image_content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 700px;
 }
 
 .what_is_trave {
   background-color: rgb(255,255,255);
-  height: 300px;
+  height: 500px;
   box-shadow: 0 2px 5px #ccc;
+  padding: 30px;
 }
 
 .downloads {

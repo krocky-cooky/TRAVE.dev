@@ -449,6 +449,34 @@
   justify-content: center;
 }
 
+.contact {
+  background-color: rgb(255,255,255);
+  box-shadow: 0 2px 5px #ccc;
+}
+
+.contact_wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.contact_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.contact_title {
+  font-size: 25px;
+}
+
+.contact_content {
+  font-size: 20px;
+  
+}
+
 .footer_wrap {
   width: 100%;
   

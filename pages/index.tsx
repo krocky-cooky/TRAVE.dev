@@ -117,7 +117,27 @@ export default function Home() {
           </div>
         </section>
         <section className={styles.contact}>
-          
+          <div className={styles.contact_wrap}>
+          <div className={styles.downloads_title} >
+            Contact
+          </div>
+          <div className={styles.contact_flex}>
+          <div className={styles.contact_title}>
+            メールアドレス
+          </div>
+          <div className={styles.contact_content}>
+            trave.training@gmail.com
+          </div>
+          </div>
+          <div className={styles.contact_flex}>
+          <div className={styles.contact_title}>
+            Twitter
+          </div>
+          <div className={styles.contact_content}>
+            <a href="https://twitter.com">https://twitter.com</a>
+          </div>
+          </div>
+          </div>
         </section>
         
       </main>

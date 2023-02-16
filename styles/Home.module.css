@@ -6,7 +6,7 @@
   padding: 6rem;
   min-height: 100vh;
 }
-
+/* 
 .description {
   display: inherit;
   justify-content: inherit;
@@ -128,7 +128,7 @@
   content: '';
   position: absolute;
   z-index: -1;
-}
+} */
 
 /* Conic Gradient Animation */
 .thirteen::before {
@@ -152,7 +152,7 @@
 }
 
 /* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
+/* @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
@@ -171,10 +171,10 @@
   .card:hover span {
     transform: none;
   }
-}
+} */
 
 /* Mobile */
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
   .content {
     padding: 4rem;
   }
@@ -248,7 +248,7 @@
     );
     z-index: 1;
   }
-}
+} */
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
@@ -360,9 +360,18 @@
 
 .what_is_trave {
   background-color: rgb(255,255,255);
-  height: 500px;
   box-shadow: 0 2px 5px #ccc;
   padding: 30px;
+}
+
+.training_image_container {
+
+}
+
+.training_image {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px #ccc;
+  width: 300px;
 }
 
 .downloads {
@@ -383,10 +392,10 @@
 }
 
 .grid_component {
-  /* height: 400px; */
+
   padding: 10px;
   max-width: 400px;
-}
+} 
 
 .card_wrapper {
   margin: 1rem auto;
@@ -398,6 +407,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px #ccc;
   min-height: 300px;
+  padding: 20px;
 }
 
 .card_img {
@@ -413,11 +423,13 @@
   font-size: 1.6em;
   color: #333;
   font-weight: 700;
+  line-height: 50px;
+
 }
 
 .card_text {
   color: #777;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   margin-bottom: 0.2em;
 }
@@ -502,4 +514,26 @@
 
 .twitter {
   height: 60px;
+}
+.what_is_trave_content {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1000px;
+  margin:0 auto;
+  padding-top: 30px;
+  font-size: 30px;
+  border-top: 1px solid #eee;
+
+}
+
+.what_is_trave_line {
+  margin-top: 10px;
+}
+
+.youtube_wrapper {
+  margin: 0 auto;
+  width: 600px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  
 }

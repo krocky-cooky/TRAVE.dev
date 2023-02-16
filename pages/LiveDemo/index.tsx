@@ -97,7 +97,9 @@ export const LiveDemo = (props: ContainerProps) => {
             const latestWinner = currentDeviceProfile?.latestWinner;
 
             setDeviceLineChartProp(deviceTorque/7.0);
-            setBattlePosition(normalizedValue);
+            if(battleState !== 3 && battleState !== 4) {
+                setBattlePosition(normalizedValue);
+            }
             if(battleState === 3 || battleState === 4) {
                 if(latestWinner === 0) {
                     setBattleState(0);
@@ -132,6 +134,22 @@ export const LiveDemo = (props: ContainerProps) => {
             <main className={styles.main}>
                 {visible ? (
                     <div className={styles.battle_monitor}>
+                        <div>
+                        {battleState === BattleState.forceGaugeWon && (
+                            <div style={{position: "relative", top: "150px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                                <img src={"/images/flag.png"} width="70px" />
+                                <div style={{fontSize: "30px",fontWeight: "bold"}}>
+                                    WIN!!
+                                </div>
+                            </div>
+                        )}
+                        {battleState === BattleState.deviceWon && (
+                            <div style={{position: "relative", top: "200px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                                <div style={{fontSize: "30px",fontWeight: "bold"}}>
+                                    LOSE...
+                                </div>
+                            </div>
+                        )}
                         <PowerLineChart
                             data={forceGaugeLineChartProp} 
                             height={"200px"}
@@ -140,10 +158,28 @@ export const LiveDemo = (props: ContainerProps) => {
                             imgHeight={100}
                             image="/images/forceGauge.png"
                             colorClass={styles.blue_vertical_gradient} />
+            
+                        </div>
                         <div style={{width:"20px"}}></div>
                         <BattleViewer
                             position={battlePosition} />
                         <div style={{width:"20px"}}></div>
+                        <div>
+                        {battleState === BattleState.deviceWon && (
+                            <div style={{position: "relative", top: "150px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                                <img src={"/images/flag.png"} width="70px" />
+                                <div style={{fontSize: "30px",fontWeight: "bold"}}>
+                                    WIN!!
+                                </div>
+                            </div>
+                        )}
+                        {battleState === BattleState.forceGaugeWon && (
+                            <div style={{position: "relative", top: "200px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                                <div style={{fontSize: "30px",fontWeight: "bold"}}>
+                                    LOSE...
+                                </div>
+                            </div>
+                        )}
                         <PowerLineChart
                             data={deviceLineChartProp}
                             height={"200px"}
@@ -152,6 +188,7 @@ export const LiveDemo = (props: ContainerProps) => {
                             imgHeight={100}
                             image="/images/weight.png"
                             colorClass={styles.red_vertical_gradient} />
+                        </div>
                     </div>
                 ) : (
                     <>

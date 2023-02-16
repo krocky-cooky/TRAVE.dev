@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UnityIcon from '../public/images/unity_icon.svg';
 import { useState, useEffect } from 'react';
+import YouTube from 'react-youtube';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -51,6 +52,51 @@ export default function Home() {
           <div className={styles.downloads_title}>
             TRAVEとは？
           </div>
+          <div style={{width:"100%"}}>
+          <div className={styles.youtube_wrapper}><YouTube videoId={"mAJBqyg3tq4"} /></div>
+          </div>
+          <div className={styles.what_is_trave_content}>
+            <div>
+              <div className={styles.what_is_trave_line}>
+                VR空間において、
+              </div>
+              <div style={{display: "flex", flexDirection:"row"}} className={styles.what_is_trave_line}>
+                <div style={{fontWeight: "bold"}}>
+                  強力で
+                </div>
+                <div style={{width: "20px"}}></div>
+                <div style={{fontWeight: "bold"}}>
+                  多様な
+                </div>
+              </div>
+              <div className={styles.what_is_trave_line}>
+                力覚演出を実現し、筋トレの
+              </div>
+              <div style={{display: "flex"}} className={styles.what_is_trave_line}>
+                <div style={{color: "red",fontWeight: "bold"}}>
+                  視
+                </div>
+                <div style={{width: "20px"}}></div>
+                <div style={{color: "green",fontWeight: "bold"}}>
+                  聴
+                </div>
+                <div style={{width: "20px"}}></div>
+                <div style={{color: "blue",fontWeight: "bold"}}>
+                  力覚体験
+                </div>
+              </div>
+              <div className={styles.what_is_trave_line}>
+                を拡張します。
+              </div>
+              <div style={{marginTop: "50px",fontSize: "35px"}} >
+                筋トレをより楽しく、高効率に。
+              </div>
+            </div>
+            <div className={styles.training_image_container}>
+              <img src={"/images/training_image.jpg"} className={styles.training_image}/>
+            </div>
+          </div>
+          
         </section>
         <section className={styles.downloads}>
           <div className={styles.downloads_title}>
@@ -84,7 +130,7 @@ export default function Home() {
                     <div><UnityIcon className={styles.card_img} width={200} height={100}/></div>
                   </div>
                   <div className={styles.card_content}>
-                    <p className={styles.card_title}>筋トレデバイスOSH(Open Source Hardware)</p>
+                    <p className={styles.card_title}>筋トレデバイス回路図</p>
                     <p className={styles.card_text}>TRAVE筋トレデバイスのUnityからの簡単な操作を実現。筋トレ×VRゲーム開発をより簡単に。</p>
                   </div>
                   <div className={styles.card_link}>
@@ -117,7 +163,27 @@ export default function Home() {
           </div>
         </section>
         <section className={styles.contact}>
-          
+          <div className={styles.contact_wrap}>
+          <div className={styles.downloads_title} >
+            Contact
+          </div>
+          <div className={styles.contact_flex}>
+          <div className={styles.contact_title}>
+            メールアドレス
+          </div>
+          <div className={styles.contact_content}>
+            trave.training@gmail.com
+          </div>
+          </div>
+          <div className={styles.contact_flex}>
+          <div className={styles.contact_title}>
+            Twitter
+          </div>
+          <div className={styles.contact_content}>
+            <a href="https://twitter.com">https://twitter.com</a>
+          </div>
+          </div>
+          </div>
         </section>
         
       </main>

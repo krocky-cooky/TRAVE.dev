@@ -154,9 +154,9 @@ export const LiveDemo = (props: ContainerProps) => {
                             data={forceGaugeLineChartProp} 
                             height={"200px"}
                             width={"70px"}
-                            imgWidth={64}
+                            imgWidth={100}
                             imgHeight={100}
-                            image="/images/forceGauge.png"
+                            image="/images/handgrip.png"
                             colorClass={styles.blue_vertical_gradient} />
             
                         </div>

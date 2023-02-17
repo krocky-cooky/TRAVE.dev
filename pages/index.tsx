@@ -96,7 +96,7 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.training_image_container}>
-              <img src={"/images/training_image.jpg"} className={styles.training_image}/>
+              <img src={"/images/training_image.JPG"} className={styles.training_image}/>
             </div>
           </div>
           

@@ -134,7 +134,7 @@ export default function Home() {
                   </div>
                   <div className={styles.card_content}>
                     <p className={styles.card_title}>筋トレデバイス回路図(pdf)</p>
-                    <p className={styles.card_text}>TRAVE筋トレデバイスのUnityからの簡単な操作を実現。筋トレ×VRゲーム開発をより簡単に。</p>
+                    <p className={styles.card_text}>TRAVEハードウェアの回路図です。モーターとのCAN通信、回生電流消費などの機能が組み込まれています。</p>
                   </div>
                   <div className={styles.card_link}>
                     ダウンロード
@@ -153,7 +153,7 @@ export default function Home() {
                   </div>
                   <div className={styles.card_content}>
                     <p className={styles.card_title}>デモ筋トレコンテンツ</p>
-                    <p className={styles.card_text}>TRAVE筋トレデバイスのUnityからの簡単な操作を実現。筋トレ×VRゲーム開発をより簡単に。</p>
+                    <p className={styles.card_text}>筋トレの課題を解決する3種類のデモコンテンツを開発しました。TRAVE Fishing, TRAVE Magic, TRAVE Battleの三つであり、GithubのUnityプロジェクトをダウンロードすることによってプレイできます。</p>
                   </div>
                   <div className={styles.card_link}>
                     詳細

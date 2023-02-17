@@ -44,6 +44,9 @@ export default function Home() {
       <main className={styles.top_main}>
         <Header />
         <section className={styles.image_section}>
+          <div className={styles.circle_container}>
+            <img src={"/images/circleclopped.png"} className={styles.circle_content} />
+          </div>
           <div className={styles.image_container}>
           <img src={"/images/world_thumbnails.png"} className={styles.image_content}/>
           </div>
@@ -123,18 +126,18 @@ export default function Home() {
               </a>
             </div>
             <div className={styles.grid_component}>
-              <a href="https://github.com/krocky-cooky/TRAVE_unity">
+              <a href="/images/TRAVE_device_schematic_beta.pdf" download="TRAVE_device_schematic.pdf">
               <div className={styles.card_wrapper}>
                 <div className={styles.card}>
                   <div className={styles.img_wrap}>
                     <div><UnityIcon className={styles.card_img} width={200} height={100}/></div>
                   </div>
                   <div className={styles.card_content}>
-                    <p className={styles.card_title}>筋トレデバイス回路図</p>
+                    <p className={styles.card_title}>筋トレデバイス回路図(pdf)</p>
                     <p className={styles.card_text}>TRAVE筋トレデバイスのUnityからの簡単な操作を実現。筋トレ×VRゲーム開発をより簡単に。</p>
                   </div>
                   <div className={styles.card_link}>
-                    詳細
+                    ダウンロード
                   </div> 
                   
                 </div>

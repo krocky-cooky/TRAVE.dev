@@ -343,19 +343,41 @@
 }
 
 .image_section {
+  height: 700px;
+}
+
+.circle_container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.circle_content {
+  display: block;
+  margin:0 auto;
 }
 
 .image_container {
-  position :relative;
+  position :absolute;
+  z-index: 0;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+
   max-width:100%;
 
 }
 
 .image_content {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   height: 700px;
+  margin: 0 auto;
 }
 
 .what_is_trave {
@@ -439,6 +461,7 @@
   border-top: 1px solid #eee;
   color: #4f96f6;
   padding: 2px;
+  font-weight: bold;
 }
 
 .card_link a {

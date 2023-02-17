@@ -96,7 +96,7 @@ export const LiveDemo = (props: ContainerProps) => {
             const battleState = currentDeviceProfile?.stateId;
             const latestWinner = currentDeviceProfile?.latestWinner;
 
-            setDeviceLineChartProp(deviceTorque/7.0);
+            setDeviceLineChartProp(deviceTorque/6.0);
             if(battleState !== 3 && battleState !== 4) {
                 setBattlePosition(normalizedValue);
             }
@@ -136,7 +136,7 @@ export const LiveDemo = (props: ContainerProps) => {
                     <div className={styles.battle_monitor}>
                         <div>
                         {battleState === BattleState.forceGaugeWon && (
-                            <div style={{position: "relative", top: "150px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                            <div style={{position: "relative", top: "150px",left: "-100px",height: "0",display: "flex", flexDirection: "column"}}>
                                 <img src={"/images/flag.png"} width="70px" />
                                 <div style={{fontSize: "30px",fontWeight: "bold"}}>
                                     WIN!!
@@ -144,7 +144,7 @@ export const LiveDemo = (props: ContainerProps) => {
                             </div>
                         )}
                         {battleState === BattleState.deviceWon && (
-                            <div style={{position: "relative", top: "200px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                            <div style={{position: "relative", top: "200px",left: "-100px",height: "0",display: "flex", flexDirection: "column"}}>
                                 <div style={{fontSize: "30px",fontWeight: "bold"}}>
                                     LOSE...
                                 </div>
@@ -166,7 +166,7 @@ export const LiveDemo = (props: ContainerProps) => {
                         <div style={{width:"20px"}}></div>
                         <div>
                         {battleState === BattleState.deviceWon && (
-                            <div style={{position: "relative", top: "150px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                            <div style={{position: "relative", top: "150px",left: "100px",height: "0",display: "flex", flexDirection: "column"}}>
                                 <img src={"/images/flag.png"} width="70px" />
                                 <div style={{fontSize: "30px",fontWeight: "bold"}}>
                                     WIN!!
@@ -174,7 +174,7 @@ export const LiveDemo = (props: ContainerProps) => {
                             </div>
                         )}
                         {battleState === BattleState.forceGaugeWon && (
-                            <div style={{position: "relative", top: "200px",left: "0px",height: "0",display: "flex", flexDirection: "column"}}>
+                            <div style={{position: "relative", top: "200px",left: "90px",height: "0",display: "flex", flexDirection: "column"}}>
                                 <div style={{fontSize: "30px",fontWeight: "bold"}}>
                                     LOSE...
                                 </div>

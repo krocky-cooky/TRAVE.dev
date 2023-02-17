@@ -29,7 +29,7 @@ export const LiveDemo = (props: ContainerProps) => {
     const BATTLE_TIMER_UPDATE_INTERVAL_MS = 1000;
     const PASS = "112358";
 
-    const [visible, setVisible] = useState<boolean>(false);
+    const [visible, setVisible] = useState<boolean>(true);
     const [inputValue, setInputValue] = useState<string>("");
     const [chartTimer, setChartTimer] = useState<number>(0);
     const [battleTimer, setBattleTimer] = useState<number>(0);

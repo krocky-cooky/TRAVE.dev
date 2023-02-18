@@ -130,7 +130,7 @@ export default function Home() {
               <div className={styles.card_wrapper}>
                 <div className={styles.card}>
                   <div className={styles.img_wrap}>
-                    <div><UnityIcon className={styles.card_img} width={200} height={100}/></div>
+                    <div><img className={styles.card_img} width={300} height={200} src={"../images/device_schematic.JPG"}/></div>
                   </div>
                   <div className={styles.card_content}>
                     <p className={styles.card_title}>筋トレデバイス回路図(pdf)</p>

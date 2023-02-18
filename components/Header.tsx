@@ -25,12 +25,12 @@ export const Header = (props: {
                     </Link>
                     <div className={styles.nav}>
                         <ul className={styles.navul}>
-                            <NavButton
+                            {/* <NavButton
                                 text={"What's TRAVE"} />
                             <NavButton
                                 text={"SetUps"} />
                             <NavButton 
-                                text={"Contact"} />
+                                text={"Contact"} /> */}
                         </ul>
                     </div>
                 </div>
